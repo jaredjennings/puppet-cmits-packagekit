@@ -19,7 +19,7 @@
 
 class packagekit::admin_auth {
     case $osfamily {
-        RedHat: {
+        'RedHat': {
             case $operatingsystemrelease {
 
                 /^6\..*/: {
@@ -44,8 +44,9 @@ class packagekit::admin_auth {
 # install or remove software without admin privileges.
                 /^5\..*/: {}
 
-                default: { unimplemented() }
+                default: { fail "unimplemented on ${::osfamily} ${::operatingsystemrelease}" }
             }
         }
+        default: { fail "unimplemented on ${::osfamily}" }
     }
 }
